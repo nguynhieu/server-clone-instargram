@@ -1,7 +1,6 @@
 const Post = require('../models/post.model');
 const User = require('../models/user.model');
 const Notification = require('../models/notification.model');
-const { connect } = require('mongoose');
 
 module.exports.index = async (req, res) => {
   const posts = await Post.find();
@@ -17,7 +16,7 @@ module.exports.newFeed = async (req, res) => {
   } = req;
 
   const user = await User.findOne({ _id: userId })
-  const image = 'http://localhost:5000/' + file.path.split('/').slice(1).join('/');
+  const image = 'https://server-instar-clone.herokuapp.com/' + file.path.split('/').slice(1).join('/');
   const post = {
     userId,
     username: user.username,
@@ -28,7 +27,9 @@ module.exports.newFeed = async (req, res) => {
     time: new Date(),
     caption
   }
-  await Post.insertMany(post);
+  // await Post.insertMany(post);
+
+  await Post.remove();
 
   res.json(post);
 }
