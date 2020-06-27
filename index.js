@@ -44,8 +44,7 @@ io.on('connection', (socket) => {
 
   socket.on('client-like', data => {
     socket.join(data.viewer);
-    console.log(data.viewer);
-    io.sockets.in(data.viewer).emit('like', 'like ne');
+    io.socket.broadcast.to(data.viewer).emit('like', 'like ne');
   });
 
 
