@@ -27,9 +27,8 @@ module.exports.newFeed = async (req, res) => {
     time: new Date(),
     caption
   }
-  // await Post.insertMany(post);
 
-  await Post.remove();
+  await Post.insertMany(post);
 
   res.json(post);
 }
